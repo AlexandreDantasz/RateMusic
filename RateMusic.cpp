@@ -15,7 +15,9 @@ int main() {
     try {
         string email, senha, id;
         cin >> email >> senha >> id;
-        controleUsuario.incluir(email, senha, id);
+        //controleUsuario.incluir(email, senha, id); funcionando
+        //controleUsuario.remover(id); funcionando
+        controleUsuario.alterar(email, senha, id);
     }
     catch (string &erro) {
         cout << erro << endl;

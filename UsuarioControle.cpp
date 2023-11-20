@@ -13,23 +13,25 @@ UsuarioControle::~UsuarioControle() {
 bool UsuarioControle::validaEmail(std::string str) {
     int tam = str.size(), i, caracNecessarios = 0;
     // realizando busca enquanto não houver caracteres diferentes
-    // de letras maiúsculas, minúsculas, @ e .
+    // de letras maiúsculas, minúsculas, números, @ e . 
+    std::cout << str << '\n';
     for (i = 0; i < tam && ((int) str[i] == 46 || 
-    ((int) str[i] >= 64 && (int) str[i] <= 90) || 
-    ((int) str[i] >= 97 && (int) str[i] <= 122)) ; i++) {
-        if ((int) str[i] == '.' || (int) str[i] == '@') caracNecessarios++;
+        ((int) str[i] >= 64 && (int) str[i] <= 90) || 
+        ((int) str[i] >= 97 && (int) str[i] <= 122)) ||
+        ((int) str[i] >= 48 && (int) str[i] <= 57) ; i++) {
+        if ( str[i] == '.' || str[i] == '@') caracNecessarios++;
     }
-
     return caracNecessarios == 2 && i == tam; // valida o email
 }
 
 bool UsuarioControle::validaSenha(std::string str) {
     int tam = str.size(), i;
     // realizando busca enquanto não houver caracteres diferentes
-    // de letras maiúsculas, minúsculas e !
+    // de letras maiúsculas, minúsculas, números e !
     for (i = 0; i < tam && ((int) str[i] == 33 || 
-    ((int) str[i] >= 65 && (int) str[i] <= 90) || 
-    ((int) str[i] >= 97 && (int) str[i] <= 122)) ; i++);
+        ((int) str[i] >= 65 && (int) str[i] <= 90) || 
+        ((int) str[i] >= 97 && (int) str[i] <= 122) || 
+        ((int) str[i] >= 48 && (int) str[i] <= 57)) ; i++);
     return i == tam; // se chegar no final, a senha está correta
 }
 

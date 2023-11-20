@@ -5,6 +5,7 @@ UsuarioDao::UsuarioDao() {
 }
 
 void UsuarioDao::incluir(Usuario * objeto) {
+    //procedimento padrão para abrir o banco de dados
     sqlite3 *bancoDeDados;
     char* zErrMsg = 0; // mensagem de erro do sqlite3
     int rc; // variável usada para saber os comandos sql foram bem executados
@@ -23,25 +24,24 @@ void UsuarioDao::incluir(Usuario * objeto) {
 }
 
 bool UsuarioDao::buscar(Usuario * objeto) {
-    std::string comando = "SELECT * FROM Usuarios WHERE idUsuario = " + objeto->getId() +
-    ";";
     sqlite3 * db;
     sqlite3_stmt * stmt; // ponteiro pra uma estrutura que representa uma consulta sql
     int rc;
     rc = sqlite3_open(nomeBd.c_str(), &db);
     if (rc != SQLITE_OK) throw std::string("Não foi possível conectar ao banco de dados");
     // foi possível conectar ao banco de dados
+    std::string comando = "SELECT * FROM Usuarios WHERE idUsuario = " + objeto->getId() +
+    ";";
     rc = sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0); // preparando a consulta
     if (rc != SQLITE_OK) {
         std::cout << "Erro na busca\n";
     }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
-        std::cout << "Usuário encontrado\n";
-        sqlite3_finalize(stmt);
+        // portanto, o usuário foi encontrado
+        sqlite3_finalize(stmt); //finalizando o processo do stmt
         sqlite3_close(db);
         return true;
     }
-    std::cout << "Usuário não encontrado\n";
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     return false;
@@ -54,8 +54,8 @@ void UsuarioDao::alterar(Usuario * objeto) {
     rc  = sqlite3_open(nomeBd.c_str(), &db);
     if (rc != SQLITE_OK) throw std::string("Não foi possível conectar ao banco de dados");
     // foi possível conectar ao banco de dados
-    std::string comando = "UPDATE Usuarios SET email = " + objeto->getEmail() + ", senha = " +
-    objeto->getSenha() + " WHERE idUsuario = " + objeto->getId() + ";";
+    std::string comando = "UPDATE Usuarios SET email = '" + objeto->getEmail() + "', senha = '" +
+    objeto->getSenha() + "' WHERE idUsuario = " + objeto->getId() + ";";
     rc = sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
         throw std::string("Não foi possível atualizar o usuário");

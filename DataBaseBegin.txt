@@ -1,0 +1,17 @@
+Sistema de avaliação de musical
+
+Usuarios(idUsuario, email, senha)
+Musica(idMusica, chaveUsuario, nome, autor, avaliacao)
+idMusica é chave estrangeira para idUsuario
+
+arquivo DDL:
+
+sqlite3
+
+.open RateMusic.db
+
+CREATE TABLE IF NOT EXISTS Usuarios(idUsuario INT PRIMARY KEY NOT NULL, email TEXT NOT NULL, senha TEXT NOT NULL);
+
+CREATE TABLE IF NOT EXISTS Musica(idMusica PRIMARY KEY NOT NULL, chaveUsuario INT, nome TEXT NOT NULL, autor TEXT NOT NULL, avaliacao INT NOT NULL, FOREIGN KEY(chaveUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE);
+
+

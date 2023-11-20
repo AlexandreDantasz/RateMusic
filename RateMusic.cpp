@@ -1,7 +1,6 @@
 #include <iostream>
 #include "sqlite3.h"
-#include "Usuario.cpp"
-#include "UsuarioDao.cpp"
+#include "UsuarioControle.cpp"
 #include <locale.h> 
 
 using namespace std;
@@ -12,14 +11,14 @@ int main() {
     //exit = sqlite3_open("teste.db", &db);
     //sqlite3_close(db);
     setlocale(LC_ALL, "portuguese");
-    Usuario * teste = new Usuario("teste@gmail", "9890", "14");
+    UsuarioControle controleUsuario;
     try {
-        UsuarioDao final;
-        //final.incluir(teste);
+        string email, senha, id;
+        cin >> email >> senha >> id;
+        controleUsuario.incluir(email, senha, id);
     }
     catch (string &erro) {
         cout << erro << endl;
     }
-    delete teste;
     return 0;
 }

@@ -37,10 +37,14 @@ bool UsuarioDao::buscar(Usuario * objeto) {
     }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
         std::cout << "Usuário encontrado\n";
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
+        return true;
     }
-    else std::cout << "Usuário não encontrado\n";
+    std::cout << "Usuário não encontrado\n";
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+    return false;
 }
 
 void UsuarioDao::alterar(Usuario * objeto) {

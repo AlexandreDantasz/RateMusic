@@ -21,3 +21,15 @@ std::string Usuario::getSenha(){
 std::string Usuario::getId() {
     return this->id;
 }
+
+void Usuario::setEmail(std::string novoEmail) {
+    this->email = novoEmail;
+}
+
+void Usuario::setSenha(std::string novaSenha) {
+    this->senha = novaSenha;
+}
+
+void Usuario::setId(std::string novoId) {
+    this->id = novoId;
+}

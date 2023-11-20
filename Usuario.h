@@ -13,6 +13,9 @@ public:
     std::string getEmail();
     std::string getSenha();
     std::string getId();
+    void setEmail(std::string novoEmail);
+    void setSenha(std::string novaSenha);
+    void setId(std::string novoId);
 };
 
 #endif

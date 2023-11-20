@@ -22,23 +22,25 @@ void UsuarioDao::incluir(Usuario * objeto) {
     std::cout << "Concluído com sucesso!\n";
 }
 
-Usuario * UsuarioDao::buscar(Usuario * objeto) {
+bool UsuarioDao::buscar(Usuario * objeto) {
     std::string comando = "SELECT * FROM Usuarios WHERE idUsuario = " + objeto->getId() +
     ";";
     sqlite3 * db;
-    char * zErrMsg = 0;
+    sqlite3_stmt * stmt; // ponteiro pra uma estrutura que representa uma consulta sql
     int rc;
     rc = sqlite3_open(nomeBd.c_str(), &db);
     if (rc != SQLITE_OK) throw std::string("Não foi possível conectar ao banco de dados");
     // foi possível conectar ao banco de dados
-    rc = sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg);
+    rc = sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0); // preparando a consulta
     if (rc != SQLITE_OK) {
-        std::cout << "Usuário não encontrado\n";
-        return nullptr;
+        std::cout << "Erro na busca\n";
     }
-    std::cout << "Usuário encontrado\n";
+    if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
+        std::cout << "Usuário encontrado\n";
+    }
+    else std::cout << "Usuário não encontrado\n";
+    sqlite3_finalize(stmt);
     sqlite3_close(db);
-    return objeto;
 }
 
 void UsuarioDao::alterar(Usuario * objeto) {
@@ -66,7 +68,7 @@ void UsuarioDao::remover(Usuario * objeto) {
     rc = sqlite3_open(nomeBd.c_str(), &db);
     if (rc != SQLITE_OK) throw std::string("Não foi possível conectar ao banco de dados");
     // foi possível conectar com o banco de dados
-    std::string comando = "DELETE FROM Usuarios WHERE idUsuarios = " + objeto->getId(); + ";";
+    std::string comando = "DELETE FROM Usuarios WHERE idUsuario = " + objeto->getId(); + ";";
     rc = sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
         sqlite3_close(db);

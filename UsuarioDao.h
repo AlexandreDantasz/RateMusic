@@ -9,7 +9,7 @@ private:
 public:
     UsuarioDao();
     void incluir(Usuario * objeto);
-    Usuario * buscar(Usuario * objeto);
+    bool buscar(Usuario * objeto);
     void alterar(Usuario * objeto);
     void remover(Usuario * objeto);
 };

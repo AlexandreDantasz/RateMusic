@@ -8,7 +8,7 @@ private:
 public:
     //Dao();
     virtual void incluir(Tipo * objeto) = 0;
-    virtual Tipo * buscar(Tipo * objeto) = 0;
+    virtual bool buscar(Tipo * objeto) = 0;
     virtual void alterar(Tipo * objeto) = 0;
     virtual void remover(Tipo * objeto) = 0;
 };

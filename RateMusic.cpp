@@ -2,7 +2,7 @@
 #include "sqlite3.h"
 #include "Usuario.cpp"
 #include "UsuarioDao.cpp"
-#include <locale> 
+#include <locale.h> 
 
 using namespace std;
 
@@ -15,7 +15,7 @@ int main() {
     Usuario * teste = new Usuario("teste@gmail", "9890", "14");
     try {
         UsuarioDao final;
-        final.incluir(teste);
+        //final.incluir(teste);
     }
     catch (string &erro) {
         cout << erro << endl;

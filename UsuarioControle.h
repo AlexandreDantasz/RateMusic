@@ -17,6 +17,7 @@ public:
     void remover(std::string id);
     bool buscar(std::string id);
     void alterar(std::string email, std::string senha, std::string id);
+    bool login(std::string email, std::string senha);
     // void listarMusicas(std::string id); será feita apenas quando 
     // o módulo de música estiver pronto
 };

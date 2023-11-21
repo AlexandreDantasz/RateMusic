@@ -12,6 +12,8 @@ public:
     bool buscar(Usuario * objeto);
     void alterar(Usuario * objeto);
     void remover(Usuario * objeto);
+    bool validarLogin(Usuario * objeto);
+    bool validarCadastro(Usuario * objeto);
 };
 
 #endif

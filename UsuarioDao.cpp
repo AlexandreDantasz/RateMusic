@@ -81,3 +81,43 @@ void UsuarioDao::remover(Usuario * objeto) {
     sqlite3_close(db);
     std::cout << "Usuário deletado com sucesso\n";
 }
+
+bool UsuarioDao::validarLogin(Usuario * objeto) {
+    sqlite3 * db;
+    sqlite3_stmt * stmt;
+    if (sqlite3_open(nomeBd.c_str(), &db) != SQLITE_OK) 
+        throw std::string("Não foi possível conectar ao banco de dados");
+    std::string comando = "SELECT senha FROM Usuarios WHERE email = '" + objeto->getEmail() +
+    "';";
+    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK)
+        throw std::string("Erro ao validar o login");
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        // Há uma linha como resultado da consulta
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
+        return true;
+    } 
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return false;
+}
+
+bool UsuarioDao::validarCadastro(Usuario * objeto) {
+    sqlite3 * db;
+    sqlite3_stmt * stmt;
+    if (sqlite3_open(nomeBd.c_str(), &db) != SQLITE_OK) 
+        throw std::string("Não foi possível conectar ao banco de dados");
+    std::string comando = "SELECT * FROM Usuarios WHERE email = '" + objeto->getEmail() +
+    "';";
+    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK)
+        throw std::string("Erro ao validar o cadastro");
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        // há uma linha como resultado da consulta
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
+        return true;
+    }
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return false;
+}

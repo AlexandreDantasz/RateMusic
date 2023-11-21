@@ -14,7 +14,6 @@ bool UsuarioControle::validaEmail(std::string str) {
     int tam = str.size(), i, caracNecessarios = 0;
     // realizando busca enquanto não houver caracteres diferentes
     // de letras maiúsculas, minúsculas, números, @ e . 
-    std::cout << str << '\n';
     for (i = 0; i < tam && ((int) str[i] == 46 || 
         ((int) str[i] >= 64 && (int) str[i] <= 90) || 
         ((int) str[i] >= 97 && (int) str[i] <= 122)) ||
@@ -85,4 +84,14 @@ void UsuarioControle::alterar(std::string email, std::string senha, std::string 
     if (!this->daoUsuario->buscar(this->usuario)) throw std::string("Esse id não foi cadastrado!");
     // é possível realizar a atualização
     this->daoUsuario->alterar(this->usuario);
+}
+
+bool UsuarioControle::login(std::string email, std::string senha) {
+    if (!validaEmail(email)) throw std::string("O email inserido está incorreto!");
+    if (!validaSenha(senha)) throw std::string("A senha não pode conter caracteres especiais!");
+    this->usuario->setEmail(email);
+    if (!this->daoUsuario->validarCadastro(this->usuario)) return false;
+    // se chegou aqui é porque existe esse cadastro
+    this->usuario->setSenha(senha);
+    return this->daoUsuario->validarLogin(this->usuario);
 }

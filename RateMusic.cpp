@@ -17,8 +17,10 @@ int hashingString(std::string str) {
 }
 
 int main() {
-    string email, senha;
-    string loginEmail, loginSenha;
+    string email, senha; // são variáveis que armazenam as informações
+    // do usuário após validação de login e cadastro.
+    string loginEmail, loginSenha; // são variáveis que armazenam informações
+    // do usuário sem validação de login e cadastro.
     setlocale(LC_ALL, "portuguese");
     UsuarioControle controleUsuario;
     try {

@@ -16,6 +16,11 @@ public:
     void setChaveUsuario(std::string newChaveUsuario);
     void setNomeAutor(std::string newNomeAutor);
     void setAvaliacao(std::string newAvaliacao);
+    std::string getNomeMusica();
+    std::string getIdMusica();
+    std::string getChaveUsuario();
+    std::string getNomeAutor();
+    std::string getAvaliacao();
 };
 
 #endif

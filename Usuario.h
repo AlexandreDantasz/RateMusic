@@ -10,12 +10,12 @@ private:
 public:
     Usuario();
     Usuario(std::string novoEmail, std::string novaSenha, std::string novoId);
-    std::string getEmail();
-    std::string getSenha();
-    std::string getId();
     void setEmail(std::string novoEmail);
     void setSenha(std::string novaSenha);
     void setId(std::string novoId);
+    std::string getEmail();
+    std::string getSenha();
+    std::string getId();
 };
 
 #endif

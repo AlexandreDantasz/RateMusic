@@ -18,9 +18,9 @@ bool UsuarioControle::validaEmail(std::string str) {
         ((int) str[i] >= 64 && (int) str[i] <= 90) || 
         ((int) str[i] >= 97 && (int) str[i] <= 122)) ||
         ((int) str[i] >= 48 && (int) str[i] <= 57) ; i++) {
-        if ( str[i] == '.' || str[i] == '@') caracNecessarios++;
+        if (str[i] == '@') caracNecessarios++;
     }
-    return caracNecessarios == 2 && i == tam; // valida o email
+    return caracNecessarios == 1 && i == tam; // valida o email
 }
 
 bool UsuarioControle::validaSenha(std::string str) {

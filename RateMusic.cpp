@@ -35,6 +35,7 @@ int main() {
                     senha = loginSenha;
                     puts("Login realizado com sucesso!");
                 }
+                else puts("Falha ao efetuar o login!");
                 break;
             case 2: // cadastro
                 printf("Digite o seu email: ");

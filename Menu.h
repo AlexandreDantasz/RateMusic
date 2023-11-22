@@ -1,5 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
+// usando iostream e conio.h de RateMusic.cpp
 
 void lerSenha(std::string * senha) {
     int digito;

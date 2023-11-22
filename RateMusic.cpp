@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> // usada também em Menu.h
 #include <conio.h> // função getch() usada em Menu.h
 #include "Menu.h"
 #include "sqlite3.h"
@@ -54,11 +54,6 @@ int main() {
                 senha = loginSenha;
                 break;
         }
-        //string email, senha, id;
-        //cin >> email >> senha >> id;
-        //controleUsuario.incluir(email, senha, id); funcionando
-        //controleUsuario.remover(id); funcionando
-        //controleUsuario.alterar(email, senha, id);
     }
     catch (string &erro) {
         cout << erro << endl;

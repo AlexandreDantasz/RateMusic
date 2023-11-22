@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "sqlite3.h"
 #include "UsuarioControle.cpp"
+#include "MusicaControle.cpp"
 #include <locale.h> 
 
 using namespace std;
@@ -25,6 +26,7 @@ int main() {
     // do usuário sem validação de login e cadastro.
     setlocale(LC_ALL, "portuguese");
     UsuarioControle controleUsuario;
+    MusicaControle controleMusica;
     try {
         switch (telaInicial()) {
             case 0: // saída do programa 
@@ -52,6 +54,29 @@ int main() {
                 puts("Cadastro realizado com sucesso!");
                 email = loginEmail;
                 senha = loginSenha;
+                break;
+        }
+        std::string nomeMusica, autor, idMusica, nota;
+        switch (telaMusica()) {
+            case 0: // saída do programa
+                return 0;
+            case 1: // adicionar música
+                printf("Digite o nome da musica: ");
+                cin.ignore();
+                getline(cin, nomeMusica);
+                printf("Digite o nome do autor: ");
+                getline(cin, autor);
+                printf("Digite a nota da música (0 - 5): ");
+                cin >> nota;
+                idMusica = to_string(hashingString(nomeMusica));
+                controleMusica.incluir(idMusica, id, nomeMusica, autor, nota);
+                puts("Musica adicionada na biblioteca!");
+                break;
+            case 2: // remover música
+                break;
+            case 3: // alterar música
+                break;
+            case 4: // busca música
                 break;
         }
     }

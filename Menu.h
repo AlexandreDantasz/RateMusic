@@ -39,4 +39,22 @@ int telaInicial() {
     return resposta;
 }
 
+int telaMusica() {
+    int resposta;
+    puts("\n----- Biblioteca -----");
+    puts("0 - Encerrar programa");
+    puts("1 - Adicionar musica");
+    puts("2 - Remover musica");
+    puts("3 - Alterar musica");
+    puts("4 - Buscar musica");
+    do { // Loop para evitar opções inválidas
+        printf("Digite a opção que deseja: ");
+        std::cin >> resposta;
+        if (resposta < 0 || resposta > 4) {
+            puts("A opção desejada está incorreta, digite novamente");
+        }
+    } while (resposta < 0 || resposta > 4);
+    return resposta;
+}
+
 #endif

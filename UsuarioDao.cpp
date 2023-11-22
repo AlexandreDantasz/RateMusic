@@ -16,8 +16,8 @@ void UsuarioDao::incluir(Usuario * objeto) {
     objeto->getSenha() +"');";
     rc = sqlite3_exec(bancoDeDados, comando.c_str(), NULL, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
-        throw std::string("Inserção deu erro");
         sqlite3_close(bancoDeDados);
+        throw std::string("Inserção deu erro");
     }
     sqlite3_close(bancoDeDados);
     std::cout << "Concluído com sucesso!\n";

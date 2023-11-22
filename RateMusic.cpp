@@ -4,6 +4,9 @@
 #include "UsuarioControle.cpp"
 #include "Menu.h"
 #include <locale.h> 
+// teste musica
+#include "MusicaDao.cpp"
+#include "Musica.cpp"
 
 using namespace std;
 
@@ -18,7 +21,7 @@ int hashingString(std::string str) {
 }
 
 int main() {
-    string email, senha; // são variáveis que armazenam as informações
+    string email, senha, id; // são variáveis que armazenam as informações
     // do usuário após validação de login e cadastro.
     int digito; // será usado para criar o efeito de senha asterisco na tela
     string loginEmail, loginSenha = ""; // são variáveis que armazenam informações
@@ -51,6 +54,7 @@ int main() {
                 if (controleUsuario.login(loginEmail, loginSenha)) {
                     email = loginEmail;
                     senha = loginSenha;
+                    id = to_string(hashingString(email));
                     puts("\nLogin realizado com sucesso!");
                 }
                 else puts("\nFalha ao efetuar o login!");
@@ -60,13 +64,30 @@ int main() {
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
                 cin >> loginSenha;
-                string id = to_string(hashingString(loginEmail));
+                id = to_string(hashingString(loginEmail));
                 controleUsuario.incluir(loginEmail, loginSenha, id);
                 puts("Cadastro realizado com sucesso!");
                 email = loginEmail;
                 senha = loginSenha;
                 break;
         }
+        printf("\nTeste de musica\n");
+        string nomeMusica, nomeAutor, avaliacao;
+        cin.ignore();
+        printf("Digite o nome da musica: ");
+        getline(cin, nomeMusica);
+        printf("Digite o nome do autor: ");
+        getline(cin, nomeAutor);
+        printf("Digite a sua avaliacao: ");
+        cin >> avaliacao;
+        Musica * musica = new Musica;
+        musica->setIdMusica(to_string(hashingString(nomeMusica)));
+        musica->setNomeAutor(nomeAutor);
+        musica->setNomeMusica(nomeMusica);
+        musica->setAvaliacao(avaliacao);
+        musica->setChaveUsuario(id);
+        MusicaDao daoMusica;
+        daoMusica.incluir(musica);
         //string email, senha, id;
         //cin >> email >> senha >> id;
         //controleUsuario.incluir(email, senha, id); funcionando

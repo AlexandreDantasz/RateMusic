@@ -91,18 +91,19 @@ bool UsuarioDao::validarLogin(Usuario * objeto) {
     "';";
     if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK)
         throw std::string("Erro ao validar o login");
-    if (sqlite3_step(stmt) == SQLITE_ROW) {
-        // Há uma linha como resultado da consulta
+    if (sqlite3_step(stmt) == SQLITE_ROW) { // Há uma linha como resultado da consulta
+        std::string senhaReal = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
         sqlite3_finalize(stmt);
         sqlite3_close(db);
-        return true;
+        if (senhaReal == objeto->getSenha()) return true;
+        return false;
     } 
     sqlite3_finalize(stmt);
     sqlite3_close(db);
     return false;
 }
 
-bool UsuarioDao::validarCadastro(Usuario * objeto) {
+bool UsuarioDao::validarCadastro(Usuario * objeto) { // irá buscar apenas o e-mail
     sqlite3 * db;
     sqlite3_stmt * stmt;
     if (sqlite3_open(nomeBd.c_str(), &db) != SQLITE_OK) 

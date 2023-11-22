@@ -34,6 +34,8 @@ bool UsuarioDao::buscar(Usuario * objeto) {
     ";";
     rc = sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0); // preparando a consulta
     if (rc != SQLITE_OK) {
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
         std::cout << "Erro na busca do usuário\n";
     }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
@@ -58,8 +60,8 @@ void UsuarioDao::alterar(Usuario * objeto) {
     objeto->getSenha() + "' WHERE idUsuario = " + objeto->getId() + ";";
     rc = sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
-        throw std::string("Não foi possível atualizar o usuário");
         sqlite3_close(db);
+        throw std::string("Não foi possível atualizar o usuário");
     }
     std::cout << "Usuário atualizado com sucesso!\n";
     sqlite3_close(db);
@@ -89,8 +91,11 @@ bool UsuarioDao::validarLogin(Usuario * objeto) {
         throw std::string("Não foi possível conectar ao banco de dados");
     std::string comando = "SELECT senha FROM Usuarios WHERE email = '" + objeto->getEmail() +
     "';";
-    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK)
+    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK) {
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
         throw std::string("Erro ao validar o login");
+    }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // Há uma linha como resultado da consulta
         std::string senhaReal = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
         sqlite3_finalize(stmt);
@@ -110,8 +115,11 @@ bool UsuarioDao::validarCadastro(Usuario * objeto) { // irá buscar apenas o e-m
         throw std::string("Não foi possível conectar ao banco de dados");
     std::string comando = "SELECT * FROM Usuarios WHERE email = '" + objeto->getEmail() +
     "';";
-    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK)
+    if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK) {
+        sqlite3_finalize(stmt);
+        sqlite3_close(db);
         throw std::string("Erro ao validar o cadastro");
+    }
     if (sqlite3_step(stmt) == SQLITE_ROW) {
         // há uma linha como resultado da consulta
         sqlite3_finalize(stmt);

@@ -34,7 +34,7 @@ bool UsuarioDao::buscar(Usuario * objeto) {
     ";";
     rc = sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0); // preparando a consulta
     if (rc != SQLITE_OK) {
-        std::cout << "Erro na busca\n";
+        std::cout << "Erro na busca do usuário\n";
     }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
         // portanto, o usuário foi encontrado

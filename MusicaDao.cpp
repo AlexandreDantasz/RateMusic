@@ -58,7 +58,7 @@ void MusicaDao::alterar(Musica * objeto) {
     sqlite3_open("RateMusic.db", &db);
     // só será possível atualizar a avaliação de uma música 
     // a música deve ser encontrada por idMusica e chaveUsuario
-    std::string comando = "UPDATE Musica SET avalicao = " + objeto->getAvaliacao() +
+    std::string comando = "UPDATE Musica SET avaliacao = " + objeto->getAvaliacao() +
     " WHERE idMusica = " + objeto->getIdMusica() + " AND chaveUsuario = " + 
     objeto->getChaveUsuario() + ";";
     if (sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg) != SQLITE_OK) {

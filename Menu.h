@@ -1,6 +1,26 @@
 #ifndef MENU_H
 #define MENU_H
-#include <iostream>
+
+void leSenha(std::string * senha) {
+    int digito;
+    std::string senhaEscrita;
+    digito = getch();
+    while (digito != 13) { //13 = carriage return (comando de iniciar nova linha)
+        if (digito != 8) { // 8 = backspace 
+            printf("*");
+            senhaEscrita += (char) digito;
+        }
+        else {
+            if (senhaEscrita.length()) {
+                printf("\b \b"); // \b irá apagar qualquer caractere na linha
+                // com espaço em branco
+                senhaEscrita.resize(senhaEscrita.length() - 1);
+            }
+        }
+        digito = getch();
+    }
+    *senha = senhaEscrita;
+}
 
 int telaInicial() {
     int resposta;

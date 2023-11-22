@@ -1,12 +1,9 @@
 #include <iostream>
-#include <conio.h>
+#include <conio.h> // função getch() usada em Menu.h
+#include "Menu.h"
 #include "sqlite3.h"
 #include "UsuarioControle.cpp"
-#include "Menu.h"
 #include <locale.h> 
-// teste musica
-#include "MusicaDao.cpp"
-#include "Musica.cpp"
 
 using namespace std;
 
@@ -36,21 +33,7 @@ int main() {
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
-                digito = getch();
-                while (digito != 13) { //13 = carriage return (comando de iniciar nova linha)
-                    if (digito != 8) { // 8 = backspace 
-                        printf("*");
-                        loginSenha += (char) digito;
-                    }
-                    else {
-                        printf("\b \b"); // \b irá apagar qualquer caractere na linha
-                        // com espaço em branco
-                        if (loginSenha.length()) {
-                            loginSenha.resize(loginSenha.length() - 1);
-                        }
-                    }
-                    digito = getch();
-                }
+                leSenha(&loginSenha);
                 if (controleUsuario.login(loginEmail, loginSenha)) {
                     email = loginEmail;
                     senha = loginSenha;
@@ -63,7 +46,7 @@ int main() {
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
-                cin >> loginSenha;
+                leSenha(&loginSenha);
                 id = to_string(hashingString(loginEmail));
                 controleUsuario.incluir(loginEmail, loginSenha, id);
                 puts("Cadastro realizado com sucesso!");
@@ -71,23 +54,6 @@ int main() {
                 senha = loginSenha;
                 break;
         }
-        printf("\nTeste de musica\n");
-        string nomeMusica, nomeAutor, avaliacao;
-        cin.ignore();
-        printf("Digite o nome da musica: ");
-        getline(cin, nomeMusica);
-        printf("Digite o nome do autor: ");
-        getline(cin, nomeAutor);
-        printf("Digite a sua avaliacao: ");
-        cin >> avaliacao;
-        Musica * musica = new Musica;
-        musica->setIdMusica(to_string(hashingString(nomeMusica)));
-        musica->setNomeAutor(nomeAutor);
-        musica->setNomeMusica(nomeMusica);
-        musica->setAvaliacao(avaliacao);
-        musica->setChaveUsuario(id);
-        MusicaDao daoMusica;
-        daoMusica.incluir(musica);
         //string email, senha, id;
         //cin >> email >> senha >> id;
         //controleUsuario.incluir(email, senha, id); funcionando

@@ -33,7 +33,7 @@ int main() {
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
-                leSenha(&loginSenha);
+                lerSenha(&loginSenha);
                 if (controleUsuario.login(loginEmail, loginSenha)) {
                     email = loginEmail;
                     senha = loginSenha;
@@ -46,7 +46,7 @@ int main() {
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
-                leSenha(&loginSenha);
+                lerSenha(&loginSenha);
                 id = to_string(hashingString(loginEmail));
                 controleUsuario.incluir(loginEmail, loginSenha, id);
                 puts("Cadastro realizado com sucesso!");

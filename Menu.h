@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-void leSenha(std::string * senha) {
+void lerSenha(std::string * senha) {
     int digito;
     std::string senhaEscrita;
     digito = getch();

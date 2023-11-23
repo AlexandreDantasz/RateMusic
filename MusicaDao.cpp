@@ -47,7 +47,7 @@ bool MusicaDao::buscar(Musica * objeto) {
     // a busca será feita por idMusica e chaveUsuario
     std::string comando = "SELECT * FROM Musica WHERE idMusica = " +
     objeto->getIdMusica() + " AND chaveUsuario = " + objeto->getChaveUsuario() +
-    ";";
+    " AND autor = '" + objeto->getNomeAutor() + "';";
     // preparando para a consulta
     if (sqlite3_prepare_v2(db, comando.c_str(), -1, &stmt, 0) != SQLITE_OK) {
         sqlite3_finalize(stmt);

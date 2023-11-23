@@ -11,7 +11,7 @@ MusicaControle::~MusicaControle() {
 }
 
 bool MusicaControle::validaId(std::string id) {
-    int i, tam = id.size();
+    int i, tam = id.length();
     for (i = 0; i < tam && (int) id[i] >= 48 && (int) id[i] <= 57; i++);
     return i == tam; // se chegar no final, o id contém apenas números
 }
@@ -42,13 +42,14 @@ bool MusicaControle::buscar(std::string idMusica, std::string chaveUsuario) {
     return daoMusica->buscar(musica);
 }
 
-void MusicaControle::alterar(std::string idMusica, std::string chaveUsuario, std::string avaliacao) {
+void MusicaControle::alterar(std::string idMusica, std::string chaveUsuario, std::string autor, std::string avaliacao) {
     if(!validaId(idMusica)) throw std::string("Id da música é inválido");
     if (!validaId(chaveUsuario)) throw std::string("Id do usuário é inválido");
     if (!validaNota(avaliacao)) throw std::string("A avaliação está incorreta");
     musica->setIdMusica(idMusica);
     musica->setChaveUsuario(chaveUsuario);
     musica->setAvaliacao(avaliacao);
+    musica->setNomeAutor(autor);
     daoMusica->alterar(musica);
 }
 

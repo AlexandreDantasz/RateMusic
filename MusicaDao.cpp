@@ -75,7 +75,7 @@ void MusicaDao::alterar(Musica * objeto) {
     // a música deve ser encontrada por idMusica e chaveUsuario
     std::string comando = "UPDATE Musica SET avaliacao = " + objeto->getAvaliacao() +
     " WHERE idMusica = " + objeto->getIdMusica() + " AND chaveUsuario = " + 
-    objeto->getChaveUsuario() + ";";
+    objeto->getChaveUsuario() + " AND autor = '" + objeto->getNomeAutor() + "';";
     if (sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg) != SQLITE_OK) {
         sqlite3_close(db);
         throw std::string("Erro na atualização da música");

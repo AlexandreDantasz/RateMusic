@@ -14,7 +14,7 @@ public:
     ~MusicaControle();
     void incluir(std::string idMusica, std::string chaveUsuario, std::string nome, std::string autor, std::string avaliacao);
     bool buscar(std::string idMusica, std::string chaveUsuario); 
-    void alterar(std::string idMusica, std::string chaveUsuario, std::string avaliacao);
+    void alterar(std::string idMusica, std::string chaveUsuario, std::string autor, std::string avaliacao);
     void remover(std::string idMusica, std::string chaveUsuario, std::string autor);
 };
 

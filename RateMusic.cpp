@@ -83,6 +83,16 @@ int main() {
                 puts("Música removida com sucesso");
                 break;
             case 3: // alterar música
+            printf("Digite o nome da música: ");
+                cin.ignore();
+                getline(cin, nomeMusica);
+                printf("Digite o nome do autor: ");
+                getline(cin, autor);
+                printf("Digite a nova nota: ");
+                cin >> nota;
+                idMusica = to_string(hashingString(nomeMusica));
+                controleMusica.alterar(idMusica, id, autor, nota);
+                puts("Música atualizada com sucesso");
                 break;
             case 4: // buscar música
                 break;

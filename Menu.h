@@ -25,7 +25,7 @@ void lerSenha(std::string * senha) {
 
 int telaInicial() {
     int resposta;
-    puts("Rate Music");
+    puts("----- Rate Music -----");
     puts("0 - Encerrar programa");
     puts("1 - Fazer Login");
     puts("2 - Cadastrar");

@@ -81,7 +81,6 @@ void MusicaDao::alterar(Musica * objeto) {
         throw std::string("Erro na atualização da música");
     }
     sqlite3_close(db);
-    printf("Música atualizada com sucesso!");
 }
 
 void MusicaDao::remover(Musica * objeto) {
@@ -91,12 +90,13 @@ void MusicaDao::remover(Musica * objeto) {
         throw std::string("Não foi possível abrir o banco de dados");
     // a remoção será filtrada por idMusica e por chaveUsuario
     std::string comando = "DELETE FROM Musica WHERE idMusica = " +
-    objeto->getIdMusica() + " AND chaveUsuario = " + objeto->getChaveUsuario() + ";";
+    objeto->getIdMusica() + " AND chaveUsuario = " + objeto->getChaveUsuario() + " AND " 
+    + "autor = '" + objeto->getNomeAutor() + "';";
+    std::cout << comando << '\n';
     if (sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg) != SQLITE_OK) 
     {
         sqlite3_close(db);
         throw std::string("Não foi possível deletar a música");
     }
     sqlite3_close(db);
-    printf("Música deletada com sucesso!");
 }

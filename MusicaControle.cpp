@@ -52,10 +52,11 @@ void MusicaControle::alterar(std::string idMusica, std::string chaveUsuario, std
     daoMusica->alterar(musica);
 }
 
-void MusicaControle::remover(std::string idMusica, std::string chaveUsuario) {
+void MusicaControle::remover(std::string idMusica, std::string chaveUsuario, std::string autor) {
     if(!validaId(idMusica)) throw std::string("Id da música é inválido");
     if (!validaId(chaveUsuario)) throw std::string("Id do usuário é inválido");
     musica->setIdMusica(idMusica);
     musica->setChaveUsuario(chaveUsuario);
+    musica->setNomeAutor(autor);
     daoMusica->remover(musica);
 }

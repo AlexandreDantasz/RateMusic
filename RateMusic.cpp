@@ -61,7 +61,7 @@ int main() {
             case 0: // saída do programa
                 return 0;
             case 1: // adicionar música
-                printf("Digite o nome da musica: ");
+                printf("Digite o nome da música: ");
                 cin.ignore();
                 getline(cin, nomeMusica);
                 printf("Digite o nome do autor: ");
@@ -70,13 +70,21 @@ int main() {
                 cin >> nota;
                 idMusica = to_string(hashingString(nomeMusica));
                 controleMusica.incluir(idMusica, id, nomeMusica, autor, nota);
-                puts("Musica adicionada na biblioteca!");
+                puts("Música adicionada na biblioteca!");
                 break;
             case 2: // remover música
+                printf("Digite o nome da música: ");
+                cin.ignore();
+                getline(cin, nomeMusica);
+                printf("Digite o nome do autor: ");
+                getline(cin, autor);
+                idMusica = to_string(hashingString(nomeMusica));
+                controleMusica.remover(idMusica, id, autor);
+                puts("Música removida com sucesso");
                 break;
             case 3: // alterar música
                 break;
-            case 4: // busca música
+            case 4: // buscar música
                 break;
         }
     }

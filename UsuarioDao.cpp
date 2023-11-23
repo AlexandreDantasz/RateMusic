@@ -20,7 +20,6 @@ void UsuarioDao::incluir(Usuario * objeto) {
         throw std::string("Inserção deu erro");
     }
     sqlite3_close(bancoDeDados);
-    std::cout << "Concluído com sucesso!\n";
 }
 
 bool UsuarioDao::buscar(Usuario * objeto) {
@@ -36,7 +35,7 @@ bool UsuarioDao::buscar(Usuario * objeto) {
     if (rc != SQLITE_OK) {
         sqlite3_finalize(stmt);
         sqlite3_close(db);
-        std::cout << "Erro na busca do usuário\n";
+        throw std::string("Erro na busca do usuário");
     }
     if (sqlite3_step(stmt) == SQLITE_ROW) { // há uma linha de resultado disponível
         // portanto, o usuário foi encontrado
@@ -63,7 +62,7 @@ void UsuarioDao::alterar(Usuario * objeto) {
         sqlite3_close(db);
         throw std::string("Não foi possível atualizar o usuário");
     }
-    std::cout << "Usuário atualizado com sucesso!\n";
+    // se chegou aqui, o usuário foi atualizado
     sqlite3_close(db);
 } 
 
@@ -81,7 +80,7 @@ void UsuarioDao::remover(Usuario * objeto) {
         throw std::string("Não foi possível deletar o usuário");
     }
     sqlite3_close(db);
-    std::cout << "Usuário deletado com sucesso\n";
+    // se chegou aqui, o usuário foi deletado
 }
 
 bool UsuarioDao::validarLogin(Usuario * objeto) {

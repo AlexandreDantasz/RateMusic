@@ -30,10 +30,10 @@ int telaInicial() {
     puts("1 - Fazer Login");
     puts("2 - Cadastrar");
     do { // Loop para evitar opções inválidas
-        printf("Digite a opção que deseja: ");
+        printf("Digite a opcao que deseja: ");
         std::cin >> resposta;
         if (resposta != 0 && resposta != 1 && resposta != 2) {
-            puts("A opção desejada está incorreta, digite novamente");
+            puts("A opcao desejada esta incorreta, digite novamente");
         }
     } while (resposta != 0 && resposta != 1 && resposta != 2);
     return resposta;
@@ -47,13 +47,14 @@ int telaMusica() {
     puts("2 - Remover musica");
     puts("3 - Alterar musica");
     puts("4 - Buscar musica");
+    puts("5 - Listar musicas");
     do { // Loop para evitar opções inválidas
-        printf("Digite a opção que deseja: ");
+        printf("Digite a opcao que deseja: ");
         std::cin >> resposta;
-        if (resposta < 0 || resposta > 4) {
-            puts("A opção desejada está incorreta, digite novamente");
+        if (resposta < 0 || resposta > 5) {
+            puts("A opcao desejada esta incorreta, digite novamente");
         }
-    } while (resposta < 0 || resposta > 4);
+    } while (resposta < 0 || resposta > 5);
     return resposta;
 }
 

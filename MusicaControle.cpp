@@ -62,3 +62,9 @@ void MusicaControle::remover(std::string idMusica, std::string chaveUsuario, std
     musica->setNomeAutor(autor);
     daoMusica->remover(musica);
 }
+
+void MusicaControle::listarMusica(std::string chaveUsuario) {
+    if (!validaId(chaveUsuario)) throw std::string("Id do usuário é inválido");
+    musica->setChaveUsuario(chaveUsuario);
+    daoMusica->listaMusica(musica);
+}

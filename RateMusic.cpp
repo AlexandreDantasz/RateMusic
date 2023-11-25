@@ -4,7 +4,7 @@
 #include "sqlite3.h"
 #include "UsuarioControle.cpp"
 #include "MusicaControle.cpp"
-#include <locale.h> 
+#include <locale.h> // locale não está funcionando no vscode
 
 using namespace std;
 
@@ -24,7 +24,6 @@ int main() {
     int digito; // será usado para criar o efeito de senha asterisco na tela
     string loginEmail, loginSenha = ""; // são variáveis que armazenam informações
     // do usuário sem validação de login e cadastro.
-    setlocale(LC_ALL, "portuguese");
     UsuarioControle controleUsuario;
     MusicaControle controleMusica;
     try {
@@ -105,6 +104,8 @@ int main() {
                     puts("Música encontrada com sucesso");
                 else puts("Música não encontrada");
                 break;
+            case 5: // listar música
+                controleMusica.listarMusica(id);
         }
     }
     catch (string &erro) {

@@ -92,7 +92,6 @@ void MusicaDao::remover(Musica * objeto) {
     std::string comando = "DELETE FROM Musica WHERE idMusica = " +
     objeto->getIdMusica() + " AND chaveUsuario = " + objeto->getChaveUsuario() + " AND " 
     + "autor = '" + objeto->getNomeAutor() + "';";
-    std::cout << comando << '\n';
     if (sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg) != SQLITE_OK) 
     {
         sqlite3_close(db);
@@ -100,3 +99,34 @@ void MusicaDao::remover(Musica * objeto) {
     }
     sqlite3_close(db);
 }
+
+int MusicaDao::callback(void * data, int argc, char ** argv, char ** azColName) {
+    char trem = 205; // símbolo usado para separar as informações
+    for (int i = 0; i < 50; i++) std::cout << trem;
+    std::cout << '\n';
+    for (int i = 0; i < argc; i++) {
+        std::cout << azColName[i] << " = " << (argv[i] ? argv[i] : "NULL") << '\n';
+    }
+    for (int i = 0; i < 50; i++) std::cout << trem;
+    std::cout << '\n';
+    return 0;
+}
+
+void MusicaDao::listaMusica(Musica * objeto) {
+    //abrindo o banco de dados
+    sqlite3 * db;
+    char * zErrMsg; // mensagem de erro caso ocorra
+    if (sqlite3_open("RateMusic.db", &db) != SQLITE_OK)
+        throw std::string("Não foi possível abrir o banco de dados");
+    // a consulta sql deve ser baseada na chaveUsuario
+    std::string comando = "SELECT nome, autor, avaliacao FROM Musica WHERE chaveUsuario = " + 
+    objeto->getChaveUsuario() + ";";
+    if (sqlite3_exec(db, comando.c_str(), callback, NULL, &zErrMsg) != SQLITE_OK) {
+        sqlite3_close(db);
+        throw std::string("Não foi possível listar as músicas");
+    }
+    // se chegar aqui, foi possível listar todas as músicas
+    sqlite3_close(db);
+}
+
+//void MusicaDao::listaMusicaAutor(Musica * objeto);

@@ -34,13 +34,12 @@ void MusicaControle::incluir(std::string idMusica, std::string chaveUsuario, std
     daoMusica->incluir(musica);
 }
 
-bool MusicaControle::buscar(std::string idMusica, std::string chaveUsuario, std::string autor) {
+void MusicaControle::buscar(std::string idMusica, std::string chaveUsuario) {
     if(!validaId(idMusica)) throw std::string("Id da música é inválido");
     if (!validaId(chaveUsuario)) throw std::string("Id do usuário é inválido");
     musica->setIdMusica(idMusica);
     musica->setChaveUsuario(chaveUsuario);
-    musica->setNomeAutor(autor);
-    return daoMusica->buscar(musica);
+    daoMusica->buscarMusica(musica);
 }
 
 void MusicaControle::alterar(std::string idMusica, std::string chaveUsuario, std::string autor, std::string avaliacao) {

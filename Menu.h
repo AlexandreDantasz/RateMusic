@@ -48,13 +48,13 @@ int telaMusica() {
     puts("3 - Alterar musica");
     puts("4 - Buscar musica");
     puts("5 - Listar musicas");
+    puts("6 - Procurar usuarios");
     do { // Loop para evitar opções inválidas
         printf("Digite a opcao que deseja: ");
         std::cin >> resposta;
-        if (resposta < 0 || resposta > 5) {
+        if (resposta < 0 || resposta > 6)
             puts("A opcao desejada esta incorreta, digite novamente");
-        }
-    } while (resposta < 0 || resposta > 5);
+    } while (resposta < 0 || resposta > 6);
     return resposta;
 }
 

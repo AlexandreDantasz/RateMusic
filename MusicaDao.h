@@ -10,6 +10,7 @@ public:
     static int callback(void * data, int argc, char ** argv, char ** azColName);
     void incluir(Musica * objeto);
     bool buscar(Musica * objeto);
+    void buscarMusica(Musica * objeto);
     void alterar(Musica * objeto);
     void remover(Musica * objeto);
     void listaMusica(Musica * objeto);

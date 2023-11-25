@@ -41,7 +41,6 @@ bool MusicaDao::buscar(Musica * objeto) {
     sqlite3_stmt * stmt;
     if (sqlite3_open("RateMusic.db", &db) != SQLITE_OK) {
         sqlite3_finalize(stmt);
-        sqlite3_close(db);
         throw std::string("Não foi possível abrir o banco de dados");
     }
     // a busca será feita por idMusica e chaveUsuario
@@ -143,6 +142,20 @@ void MusicaDao::listaMusicaAutor(Musica * objeto) {
         sqlite3_close(db);
         throw std::string("Nao foi possivel listar as musicas pelo autor");
     }
-    // se chear aqui, foi possível listar todas as músicas
+    // se chegar aqui, foi possível listar todas as músicas
+    sqlite3_close(db);
+}
+
+void MusicaDao::buscarMusica(Musica * objeto) {
+    // essa função deve ser capaz de realizar uma busca de uma 
+    // música no banco de dados e mostrar o seu autor e sua avaliação
+    sqlite3 * db;
+    if (sqlite3_open("RateMusic.db", &db) != SQLITE_OK)
+        throw std::string("Nao foi possivel abrir o banco de dados");
+    std::string comando = "SELECT autor, avaliacao FROM Musica WHERE chaveUsuario = " +
+    objeto->getChaveUsuario() + " AND idMusica = " + objeto->getIdMusica() + ";";
+    if (sqlite3_exec(db, comando.c_str(), callback, NULL, NULL) != SQLITE_OK)
+        throw std::string("Nao foi possivel buscar a musica");
+    // se chegar aqui, signica que foi possível realizar a consulta
     sqlite3_close(db);
 }

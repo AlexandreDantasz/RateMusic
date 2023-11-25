@@ -13,7 +13,7 @@ public:
     void alterar(Musica * objeto);
     void remover(Musica * objeto);
     void listaMusica(Musica * objeto);
-    //void listaMusicaAutor(Musica * objeto);
+    void listaMusicaAutor(Musica * objeto);
 };
 
 #endif

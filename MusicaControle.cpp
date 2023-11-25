@@ -68,3 +68,10 @@ void MusicaControle::listarMusica(std::string chaveUsuario) {
     musica->setChaveUsuario(chaveUsuario);
     daoMusica->listaMusica(musica);
 }
+
+void MusicaControle::listarMusicaAutor(std::string chaveUsuario, std::string autor) {
+    if (!validaId(chaveUsuario)) throw std::string("Id do usuário é inválido");
+    musica->setChaveUsuario(chaveUsuario);
+    musica->setNomeAutor(autor);
+    daoMusica->listaMusicaAutor(musica);
+}

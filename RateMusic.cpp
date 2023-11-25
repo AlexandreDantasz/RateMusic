@@ -31,6 +31,7 @@ int main() {
             case 0: // saída do programa 
                 return 0;
             case 1: // login
+                printf("\n------ [Login] ------\n");
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
@@ -39,11 +40,12 @@ int main() {
                     email = loginEmail;
                     senha = loginSenha;
                     id = to_string(hashingString(email));
-                    puts("\nLogin realizado com sucesso!");
+                    puts("\nStatus: Login realizado com sucesso!");
                 }
-                else puts("\nFalha ao efetuar o login!");
+                else puts("\nStatus: Falha ao efetuar o login!");
                 break;
             case 2: // cadastro
+                printf("\n------ [Cadastro] ------\n");
                 printf("Digite o seu email: ");
                 cin >> loginEmail;
                 printf("Digite a sua senha: ");
@@ -60,52 +62,69 @@ int main() {
             case 0: // saída do programa
                 return 0;
             case 1: // adicionar música
-                printf("Digite o nome da música: ");
+                printf("\n------ [Adicionar] ------\n");
+                printf("Digite o nome da musica: ");
                 cin.ignore();
                 getline(cin, nomeMusica);
                 printf("Digite o nome do autor: ");
                 getline(cin, autor);
-                printf("Digite a nota da música (0 - 5): ");
+                printf("Digite a nota da musica (0 - 5): ");
                 cin >> nota;
                 idMusica = to_string(hashingString(nomeMusica));
                 controleMusica.incluir(idMusica, id, nomeMusica, autor, nota);
-                puts("Música adicionada na biblioteca!");
+                puts("Musica adicionada na biblioteca!");
                 break;
             case 2: // remover música
-                printf("Digite o nome da música: ");
+                printf("\n------ [Remover] ------\n");
+                printf("Digite o nome da musica: ");
                 cin.ignore();
                 getline(cin, nomeMusica);
                 printf("Digite o nome do autor: ");
                 getline(cin, autor);
                 idMusica = to_string(hashingString(nomeMusica));
                 controleMusica.remover(idMusica, id, autor);
-                puts("Música removida com sucesso");
+                puts("Status: Musica removida com sucesso");
                 break;
             case 3: // alterar música
-                printf("Digite o nome da música: ");
+                printf("\n------ [Alterar] ------\n");
+                printf("Digite o nome da musica: ");
                 cin.ignore();
                 getline(cin, nomeMusica);
                 printf("Digite o nome do autor: ");
                 getline(cin, autor);
-                printf("Digite a nova nota para essa música: ");
+                printf("Digite a nova nota para essa musica: ");
                 cin >> nota;
                 idMusica = to_string(hashingString(nomeMusica));
                 controleMusica.alterar(idMusica, id, autor, nota);
-                puts("Música atualizada com sucesso");
+                puts("Musica atualizada com sucesso");
                 break;
             case 4: // buscar música
-                printf("Digite o nome da música: ");
+                printf("Digite o nome da musica: ");
                 cin.ignore();
                 getline(cin, nomeMusica);
                 printf("Digite o nome do autor: ");
                 getline(cin, autor);
                 idMusica = to_string(hashingString(nomeMusica));
                 if (controleMusica.buscar(idMusica, id, autor)) 
-                    puts("Música encontrada com sucesso");
-                else puts("Música não encontrada");
+                    puts("Musica encontrada com sucesso");
+                else puts("Musica não encontrada");
                 break;
             case 5: // listar música
-                controleMusica.listarMusica(id);
+                switch (telaListarMusicas()) {
+                    case 0: // encerrar o programa
+                        return 0;
+                    case 1: // listar toda biblioteca
+                        printf("\n------ [Minha biblioteca] ------\n");
+                        controleMusica.listarMusica(id);
+                        break;
+                    case 2: // listar músicas de um autor
+                        cin.ignore();
+                        printf("Digite o nome do autor: ");
+                        getline(cin, autor);
+                        cout << "\n\n------ [" << autor << "] ------\n";
+                        controleMusica.listarMusicaAutor(id, autor);
+                        break;
+                }
         }
     }
     catch (string &erro) {

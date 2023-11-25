@@ -113,9 +113,11 @@ int MusicaDao::callback(void * data, int argc, char ** argv, char ** azColName) 
 }
 
 void MusicaDao::listaMusica(Musica * objeto) {
-    //abrindo o banco de dados
+    // essa função deve listar todas as músicas da
+    // biblioteca de um usuário
     sqlite3 * db;
     char * zErrMsg; // mensagem de erro caso ocorra
+    //abrindo o banco de dados
     if (sqlite3_open("RateMusic.db", &db) != SQLITE_OK)
         throw std::string("Não foi possível abrir o banco de dados");
     // a consulta sql deve ser baseada na chaveUsuario
@@ -129,4 +131,18 @@ void MusicaDao::listaMusica(Musica * objeto) {
     sqlite3_close(db);
 }
 
-//void MusicaDao::listaMusicaAutor(Musica * objeto);
+void MusicaDao::listaMusicaAutor(Musica * objeto) {
+    // essa função deve ser capaz de listar todas as
+    // músicas da biblioteca do usuário, filtrando elas por um autor
+    sqlite3 * db; 
+    if (sqlite3_open("RateMusic.db", &db) != SQLITE_OK)
+        throw std::string("Nao foi possivel abrir o banco de dados");
+    std::string comando = "SELECT nome, avaliacao FROM Musica WHERE chaveUsuario = " +
+    objeto->getChaveUsuario() + " AND autor = '" + objeto->getNomeAutor() + "';";
+    if (sqlite3_exec(db, comando.c_str(), callback, NULL, NULL) != SQLITE_OK) {
+        sqlite3_close(db);
+        throw std::string("Nao foi possivel listar as musicas pelo autor");
+    }
+    // se chear aqui, foi possível listar todas as músicas
+    sqlite3_close(db);
+}

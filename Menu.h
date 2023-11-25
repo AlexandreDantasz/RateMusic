@@ -25,7 +25,7 @@ void lerSenha(std::string * senha) {
 
 int telaInicial() {
     int resposta;
-    puts("----- Rate Music -----");
+    puts("----- [Rate Music] -----");
     puts("0 - Encerrar programa");
     puts("1 - Fazer Login");
     puts("2 - Cadastrar");
@@ -41,8 +41,8 @@ int telaInicial() {
 
 int telaMusica() {
     int resposta;
-    puts("\n----- Biblioteca -----");
-    puts("0 - Encerrar programa");
+    puts("\n----- [Biblioteca] -----");
+    puts("0 - Encerrar o programa");
     puts("1 - Adicionar musica");
     puts("2 - Remover musica");
     puts("3 - Alterar musica");
@@ -55,6 +55,21 @@ int telaMusica() {
             puts("A opcao desejada esta incorreta, digite novamente");
         }
     } while (resposta < 0 || resposta > 5);
+    return resposta;
+}
+
+int telaListarMusicas() {
+    int resposta;
+    puts("\n------- [Listar musicas] -------");
+    puts("0 - Encerrar o programa");
+    puts("1 - Listar toda a biblioteca");
+    puts("2 - Filtrar pelo autor");
+    do {
+        printf("Digite a opcao que deseja: ");
+        std::cin >> resposta;
+        if (resposta < 0 || resposta > 2) 
+            puts("A opcao deseja esta incorreta, digite novamente");
+    } while (resposta < 0 || resposta > 2);
     return resposta;
 }
 

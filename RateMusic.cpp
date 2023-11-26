@@ -15,7 +15,7 @@ int hashingString(std::string str) {
     for (int i = 0; i < tam; i++) { 
         hash += (int) str[i] * (i + 1);
     }
-    return hash % 30;
+    return hash % 99999;
 }
 
 int main() {
@@ -48,7 +48,7 @@ int main() {
                     else puts("\nStatus: Falha ao efetuar o login!");
                     break;
                 case 2: // cadastro
-                    printf("\n------ [Cadastro] ------\n");
+                    printf("\n------ [Cadastrar] ------\n");
                     printf("Digite o seu email: ");
                     cin >> loginEmail;
                     printf("Digite a sua senha: ");
@@ -69,7 +69,7 @@ int main() {
                     return 0;
                 case 1: // adicionar música
                     system("cls");
-                    printf("\n------ [Adicionar] ------\n");
+                    printf("\n------ [Adicionar musica] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
                     getline(cin, nomeMusica);
@@ -83,7 +83,7 @@ int main() {
                     break;
                 case 2: // remover música
                     system("cls");
-                    printf("\n------ [Remover] ------\n");
+                    printf("\n------ [Remover musica] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
                     getline(cin, nomeMusica);
@@ -95,7 +95,7 @@ int main() {
                     break;
                 case 3: // alterar música
                     system("cls");
-                    printf("\n------ [Alterar] ------\n");
+                    printf("\n------ [Alterar musica] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
                     getline(cin, nomeMusica);

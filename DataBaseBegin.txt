@@ -10,6 +10,8 @@ sqlite3
 
 .open RateMusic.db
 
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS Usuarios(idUsuario INT PRIMARY KEY NOT NULL, email TEXT NOT NULL, senha TEXT NOT NULL);
 
 CREATE TABLE IF NOT EXISTS Musica(idMusica INT NOT NULL, chaveUsuario INT, nome TEXT NOT NULL, autor TEXT NOT NULL, avaliacao INT NOT NULL, FOREIGN KEY(chaveUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE);

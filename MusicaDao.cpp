@@ -28,7 +28,7 @@ void MusicaDao::incluir(Musica * objeto) {
     "', " + objeto->getAvaliacao() + ");";
     if (sqlite3_exec(db, comando.c_str(), NULL, 0, &zErrMsg) != SQLITE_OK) {
         sqlite3_close(db);
-        throw std::string("Erro na inserção da música");
+        throw std::string("Erro na insercao da musica");
     }
     // se chegar aqui, a inclusão foi feita corretamente
     sqlite3_close(db);

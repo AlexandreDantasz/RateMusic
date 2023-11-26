@@ -55,19 +55,20 @@ int main() {
                     lerSenha(&loginSenha);
                     id = to_string(hashingString(loginEmail));
                     controleUsuario.incluir(loginEmail, loginSenha, id);
-                    puts("Cadastro realizado com sucesso!");
+                    puts("\nStatus: Cadastro realizado com sucesso!");
                     email = loginEmail;
                     senha = loginSenha;
                     flag++;
                     break;
             }
         } while (!flag);
-        std::string nomeMusica, autor, idMusica, nota;
+        std::string nomeMusica, autor, idMusica, nota, buscarUsuario;
         while (flag) {
             switch (telaMusica()) {
                 case 0: // saída do programa
                     return 0;
                 case 1: // adicionar música
+                    system("cls");
                     printf("\n------ [Adicionar] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
@@ -81,6 +82,7 @@ int main() {
                     puts("Musica adicionada na biblioteca!");
                     break;
                 case 2: // remover música
+                    system("cls");
                     printf("\n------ [Remover] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
@@ -92,6 +94,7 @@ int main() {
                     puts("Status: Musica removida com sucesso");
                     break;
                 case 3: // alterar música
+                    system("cls");
                     printf("\n------ [Alterar] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
@@ -105,6 +108,7 @@ int main() {
                     puts("Musica atualizada com sucesso");
                     break;
                 case 4: // buscar música
+                    system("cls");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
                     getline(cin, nomeMusica);
@@ -113,15 +117,19 @@ int main() {
                     controleMusica.buscar(idMusica, id);
                     break;
                 case 5: // listar música
+                    system("cls");
                     switch (telaListarMusicas()) {
                         case 0: // encerrar o programa
                             return 0;
                         case 1: // listar toda biblioteca
+                            system("cls");
                             printf("\n------ [Minha biblioteca] ------\n");
                             controleMusica.listarMusica(id);
                             break;
                         case 2: // listar músicas de um autor
                             cin.ignore();
+                            system("cls");
+                            printf("------- [Listar musicas] ------\n");
                             printf("Digite o nome do autor: ");
                             getline(cin, autor);
                             cout << "\n\n------ [" << autor << "] ------\n";
@@ -129,13 +137,52 @@ int main() {
                             break;
                     }
                     break;
-                case 6: // Buscar biblioteca de outros usuários
+                case 6: // buscar biblioteca de outros usuários
+                    system("cls");
+                    system("cls");
                     puts("\n------ [Buscar usuarios] ------");
                     printf("Digite o email do usuario: ");
-                    std::string buscarUsuario;
                     cin >> buscarUsuario;
+                    system("cls");
                     cout << "\n------ [" << buscarUsuario << "] ------\n";
                     controleMusica.listarMusica(to_string(hashingString(buscarUsuario)));            
+                    break;
+                case 7: // sair da conta
+                    flag--;
+                    do {
+                        switch (telaInicial()) {
+                            case 0: // saída do programa 
+                                return 0;
+                            case 1: // login
+                                printf("\n------ [Login] ------\n");
+                                printf("Digite o seu email: ");
+                                cin >> loginEmail;
+                                printf("Digite a sua senha: ");
+                                lerSenha(&loginSenha);
+                                if (controleUsuario.login(loginEmail, loginSenha)) {
+                                    email = loginEmail;
+                                    senha = loginSenha;
+                                    id = to_string(hashingString(email));
+                                    puts("\nStatus: Login realizado com sucesso!");
+                                    flag++;
+                                }
+                                else puts("\nStatus: Falha ao efetuar o login!");
+                                break;
+                            case 2: // cadastro
+                                printf("\n------ [Cadastro] ------\n");
+                                printf("Digite o seu email: ");
+                                cin >> loginEmail;
+                                printf("Digite a sua senha: ");
+                                lerSenha(&loginSenha);
+                                id = to_string(hashingString(loginEmail));
+                                controleUsuario.incluir(loginEmail, loginSenha, id);
+                                puts("\nStatus: Cadastro realizado com sucesso!");
+                                email = loginEmail;
+                                senha = loginSenha;
+                                flag++;
+                                break;
+                        }
+                    } while (!flag);
                     break;
             }
         }

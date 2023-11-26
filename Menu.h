@@ -25,7 +25,8 @@ void lerSenha(std::string * senha) {
 
 int telaInicial() {
     int resposta;
-    puts("----- [Rate Music] -----");
+    system("cls");
+    puts("\n----- [Rate Music] -----");
     puts("0 - Encerrar programa");
     puts("1 - Fazer Login");
     puts("2 - Cadastrar");
@@ -49,12 +50,13 @@ int telaMusica() {
     puts("4 - Buscar musica");
     puts("5 - Listar musicas");
     puts("6 - Procurar usuarios");
+    puts("7 - Sair da conta");
     do { // Loop para evitar opções inválidas
         printf("Digite a opcao que deseja: ");
         std::cin >> resposta;
-        if (resposta < 0 || resposta > 6)
+        if (resposta < 0 || resposta > 7)
             puts("A opcao desejada esta incorreta, digite novamente");
-    } while (resposta < 0 || resposta > 6);
+    } while (resposta < 0 || resposta > 7);
     return resposta;
 }
 

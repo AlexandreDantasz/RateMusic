@@ -2,7 +2,7 @@ Sistema de avaliação de musical
 
 Usuarios(idUsuario, email, senha)
 Musica(idMusica, chaveUsuario, nome, autor, avaliacao)
-idMusica é chave estrangeira para idUsuario
+chaveUsuario é chave estrangeira para idUsuario
 
 arquivo DDL:
 

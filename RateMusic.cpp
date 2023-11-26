@@ -109,6 +109,7 @@ int main() {
                     break;
                 case 4: // buscar música
                     system("cls");
+                    printf("------ [Buscar musica] ------\n");
                     printf("Digite o nome da musica: ");
                     cin.ignore();
                     getline(cin, nomeMusica);
